@@ -17,11 +17,10 @@ class Application(object):
         #    logger.error("Error message")
         #    logger.info("Info message")
         #    time.sleep(10)
-        while True:
-            for event in self.keyboard.read_loop():
-                logger.info("Parampampam")
-                if event.type == ecodes.EV_KEY:
-                    logger.info(str(categorize(event)))
+        for event in self.keyboard.read_loop():
+            logger.info("Parampampam")
+            if event.type == ecodes.EV_KEY:
+                logger.info(str(categorize(event)))
 
 logger = logging.getLogger("DaemonLog")
 logger.setLevel(logging.DEBUG)
