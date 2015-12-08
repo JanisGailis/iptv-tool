@@ -10,7 +10,7 @@ def main():
     tv = iptv()
 
     for event in device.read_loop():
-        if event.type == ecodes.EV_KEY:
+        if event.type == ecodes.EV_KEY and event.value == 0:
             print str(categorize(event))
             tv.runTV3()
 
