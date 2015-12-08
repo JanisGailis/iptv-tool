@@ -27,3 +27,14 @@ And add to the end of file the following two lines:
 
 # Let user 'user1' execute commands as user 'iptv' without prompts
 user1	ALL=(iptv)	NOPASSWD: ALL
+
+Dependencies
+============
+
+The script requires the 'evdev' python package to run. This is used
+to catch the keyboard events. The 'evdev' package requires python
+development package to compile. Hence:
+
+$ sudo apt-get install python-pip
+$ sudo apt-get install python-dev
+$ pip install evdev
