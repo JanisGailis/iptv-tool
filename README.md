@@ -45,3 +45,15 @@ $ sudo apt-get install python-pip
 $ sudo apt-get install python-dev
 $ pip install evdev
 ```
+Launching the tool
+--------------------------------------------------------------------------
+There is a dedicated launch script that runs the script as 'iptv' user
+that should be part of the 'input' group as per setup instructions. To 
+launch the tool, give execute permissions to the launch script:
+```
+$ sudo chmod +x launcher.sh
+```
+And launch it:
+```
+./launcher.sh
+```
