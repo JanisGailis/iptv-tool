@@ -1,15 +1,13 @@
+- [iptv-tool](#)
+	- [IPTV Setup instructions](#)
+	- [Dependencies](#)
+	- [Launching the tool](#)
+
 iptv-tool
 ==========================================================================
 
 A tool used to turn a Linux box (Raspberry Pi, probably) into a set-top box
 for viewing internet TV. Developed for Debian (Raspbian) with Openbox.
-
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
-
-- [iptv-tool](#)
-	- [IPTV Setup instructions](#)
-	- [Dependencies](#)
-	- [Launching the tool](#)
 
 IPTV Setup instructions
 --------------------------------------------------------------------------
