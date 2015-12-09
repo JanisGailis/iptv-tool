@@ -1,11 +1,11 @@
 iptv-tool
-=========
-
-A tool used to turn a Linux box (Raspberry Pi, probably) into a set-top box for viewing internet TV.
-
 ==========================================================================
-====                    IPTV Setup instructions                       ====
-==========================================================================
+
+A tool used to turn a Linux box (Raspberry Pi, probably) into a set-top box
+for viewing internet TV. Developed for Debian (Raspbian) with Openbox.
+
+IPTV Setup instructions
+--------------------------------------------------------------------------
 
 The main.py script has certain prerequisites that need to be fulfilled to
 run it successfully. The script has to have effective group id that points
@@ -35,12 +35,13 @@ user1	ALL=(iptv)	NOPASSWD: ALL
 ```
 
 Dependencies
-============
+--------------------------------------------------------------------------
 
 The script requires the 'evdev' python package to run. This is used
 to catch the keyboard events. The 'evdev' package requires python
 development package to compile. Hence:
-
+```
 $ sudo apt-get install python-pip
 $ sudo apt-get install python-dev
 $ pip install evdev
+```
