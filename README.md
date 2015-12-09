@@ -1,7 +1,7 @@
-- [iptv-tool](#)
-	- [IPTV Setup instructions](#)
-	- [Dependencies](#)
-	- [Launching the tool](#)
+- [iptv-tool](#iptv-tool)
+	- [IPTV Setup instructions](#iptv setup instructions)
+	- [Dependencies](#dependencies)
+	- [Launching the tool](#launching the tool)
 
 iptv-tool
 ==========================================================================
