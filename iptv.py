@@ -3,7 +3,7 @@
 import subprocess
 import time
 
-class iptv(object):
+class Iptv(object):
     """
     A class for iptv methods.
     """

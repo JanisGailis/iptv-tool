@@ -2,18 +2,18 @@
 Test the event capture library.
 """
 
-from evdev import InputDevice, categorize, ecodes
-from iptv import iptv
+from evdev import InputDevice
+from iptv import Iptv
+from event_handler import EventHandler
 
 def main():
     device = InputDevice('/dev/input/event0')
-    tv = iptv()
+    tv = Iptv()
+    handler = EventHandler()
 
     for event in device.read_loop():
-        if event.type == ecodes.EV_KEY and event.value == 0:
-            print str(categorize(event))
-            tv.runTV3()
+        handler.handle(event)
+
 
 if __name__=="__main__":
     main()
-
