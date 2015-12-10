@@ -1,0 +1,9 @@
+{
+	"accepted_keys" : ["1","2","3","4","5","6","7","8","9","0","UP","DOWN","LEFT","RIGHT","ENTER","ESC"],
+	"start_tv_key" : "ENTER",
+	"stop_tv_key" : "ESC",
+	"channel_down" : "LEFT",
+	"channel_up" : "RIGHT",
+	"volume_down" : "DOWN",
+	"volume_up" : "UP"
+}
