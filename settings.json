@@ -5,5 +5,10 @@
 	"channel_down" : "LEFT",
 	"channel_up" : "RIGHT",
 	"volume_down" : "DOWN",
-	"volume_up" : "UP"
+	"volume_up" : "UP",
+	"channel_list" : ["http://tvid.space/tvlink/flash/megogonet2/ltv1.php",
+							"http://tvid.space/tvlink/flash/megogonet2/ltv7.php",
+							"http://tv4free.us/tv3.php",
+							"http://tv4free.us/lnt.php",
+							"http://tv4free.us/tv6.php"]
 }

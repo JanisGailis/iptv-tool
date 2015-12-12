@@ -4,6 +4,7 @@ Handle the events captured by the main module.
 
 from evdev import categorize, ecodes
 import json
+from iptv import Iptv
 
 class EventHandler(object):
     """
@@ -13,6 +14,8 @@ class EventHandler(object):
         # Open settings
         with open("settings.json") as settings_file:
             self.settings = json.load(settings_file)
+
+        self.iptv = Iptv()
 
     def handle(self, event):
         """
@@ -24,45 +27,29 @@ class EventHandler(object):
         key = ecodes.KEY[event.code][4:]
         
         try:
-            int(key)
             # Call a 'set channel number' function
-            #return None
+            self.iptv.set_channel(int(key))
+            return None
         except ValueError:
             pass
 
-        # TODO: Read PEP 3103 to figure out how to do this best
-
         if key == self.settings["start_tv_key"]:
-            # Call 'switch on' function
-            #return None
-            pass
+            self.iptv.switch_on()
 
-        if key == self.settings["stop_tv_key"]:
-            # Call 'switch off' function
-            #return None
-            pass
+        elif key == self.settings["stop_tv_key"]:
+            self.iptv.switch_off()
 
-        if key == self.settings["channel_down"]:
-            # Call 'channel down' function
-            # return None
-            pass
+        elif key == self.settings["channel_down"]:
+            self.iptv.previous_channel()
 
-        if key == self.settings["channel_up"]:
-            # Call channel up function
-            # return None
-            pass
+        elif key == self.settings["channel_up"]:
+            self.iptv.next_channel()
 
-        if key == self.settings["volume_down"]:
-            # Call volume up function
-            # return None
-            pass
+        elif key == self.settings["volume_down"]:
+            self.iptv.volume_down()
 
-        if key == self.settings["volume_up"]:
-            # Call volume up function
-            # return None
-            pass
-
-        self.output(event)
+        elif key == self.settings["volume_up"]:
+            self.iptv.volume_up()
 
     def filter_event(self, event):
         """
