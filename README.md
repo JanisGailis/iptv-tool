@@ -26,6 +26,11 @@ The user should have no password.
 ```
 $ sudo passwd -d iptv
 ```
+The user should be able to play sound:
+```
+$ sudo adduser iptv audio
+```
+
 And the normal login user should be able to execute commands as the
 iptv user without password prompts, so that the iptv background process
 can be launched automatically on startup. Hence /etc/sudoers has to be
@@ -42,18 +47,19 @@ user1	ALL=(iptv)	NOPASSWD: ALL
 Dependencies
 --------------------------------------------------------------------------
 
-The script requires the 'evdev' python package to run. This is used
-to catch the keyboard events. The 'evdev' package requires python
-development package to compile. Hence:
+The script requires 'evdev' and 'splinter' python packages to run. 'evdev' is used
+to catch the keyboard events, 'splinter' is used for browser control. The 'evdev' 
+package requires python development package to compile. Hence:
 ```
 $ sudo apt-get install python-pip
 $ sudo apt-get install python-dev
 $ pip install evdev
+$ pip install splinter
 ```
 Launching the tool
 --------------------------------------------------------------------------
 There is a dedicated launch script that runs the script as 'iptv' user
-that should be part of the 'input' group as per setup instructions. To 
+that should be part of the 'input' and 'audio' groups as per setup instructions. To 
 launch the tool, give execute permissions to the launch script:
 ```
 $ sudo chmod +x launcher.sh
