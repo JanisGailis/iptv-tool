@@ -15,6 +15,10 @@ class Iptv(object):
         """
         self.browser = None
         self.winid = None
+        # TODO: Read from saved settings
+        self.channel = 3
+        self.volume = "50%"
+        self.muted = False
 
         # Read the settings
         with open("settings.json") as settings_file:
@@ -32,36 +36,6 @@ class Iptv(object):
 
         resolution = resolution.split()[0]
         self.width, self.height = resolution.split('x')
-
-    def runTV3(self):
-        """
-        Launch chromium in app mode pointing to TV3
-        and switch the player to fullscreen.
-        """
-        subprocess.Popen(["chromium", "-app=http://tv4free.us/tv3.php"])
-        process_started = False
-        winid = None
-        while not process_started:
-            try:
-                winid = subprocess.check_output(["xdotool","search","--name","TV4FREE"])
-                winid = winid[:8]
-                process_started = True
-            except subprocess.CalledProcessError:
-                pass
-
-        output = subprocess.check_output(["xrandr"])
-        output = output.splitlines()
-        for line in output:
-            if '*' in line:
-                resolution = line
-
-        resolution = resolution.split()[0]
-        width, height = resolution.split('x')
-
-        subprocess.call(["xdotool", "windowfocus", winid, "key", "F11"])
-        subprocess.call(["xdotool", "mousemove", "--sync", str(int(width)/2), "150"])
-        time.sleep(1)
-        subprocess.call(["xdotool", "click", "--repeat", "2", "1"])
 
     def set_channel(self, channel_nr):
         """
@@ -120,6 +94,18 @@ class Iptv(object):
         subprocess.call(["xdotool", "mousemove", "--sync",
             str(int(self.width)/2), str(int(self.height)/4)])
 
+        # Set volume to the saved volume
+        self.set_volume(self.volume)
+        # Set to the saved channel
+        self.set_channel(self.channel)
+
+    def set_volume(self, volume):
+        """
+        Set the volume to 'volume'.
+        volume -- string in the form of 'xx%'
+        """
+        subprocess.call(["amixer", "sset", "Master", "playback", volume])
+
     def switch_off(self):
         """
         Switch the TV application off.
@@ -133,10 +119,44 @@ class Iptv(object):
         """
         Increase the system volume.
         """
-        print "Volume up."
+        subprocess.call(["amixer", "sset", "Master", "playback", "5%+"])
+        self.volume = self.get_volume()
+        self.muted = False
+
+    def get_volume(self):
+        """
+        Get the current volume.
+        """
+        output = subprocess.check_output(["amixer", "sget", "Master"])
+        output = output.split()
+        for word in output:
+            if '%' in word:
+                return word[1:-1]
+
+        return None
 
     def volume_down(self):
         """
         Decrease the system volume.
         """
-        print "Volume down."
+        subprocess.call(["amixer", "sset", "Master", "playback", "5%-"])
+        self.volume = self.get_volume()
+        self.muted = False
+
+    def volume_mute(self):
+        """
+        Mute/Unmute volume.
+        """
+        if self.muted:
+            self.set_volume(self.volume)
+            self.muted = False
+        else:
+            self.volume = self.get_volume()
+            self.set_volume("0%")
+            self.muted = True
+
+    def stream_pause(self):
+        """
+        Play/Pause the current stream.
+        """
+        subprocess.call(["xdotool", "click", "1"])

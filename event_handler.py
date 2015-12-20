@@ -51,6 +51,12 @@ class EventHandler(object):
         elif key == self.settings["volume_up"]:
             self.iptv.volume_up()
 
+        elif key == self.settings["volume_mute"]:
+            self.iptv.volume_mute()
+
+        elif key == self.settings["stream_pause"]:
+            self.iptv.stream_pause()
+
     def filter_event(self, event):
         """
         Filter out all unneeded events.
